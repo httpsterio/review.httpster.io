@@ -1,0 +1,37 @@
+--- 
+title: Articles
+description: Long-form personal articles not fit for general consumption.
+pagination: 
+  data: collections.article
+  size: 5
+  alias: article 
+---
+
+{% extends 'layouts/base.njk' %}
+
+{# Intro content #}
+{% set introHeading %}Articles{% endset %}
+{% set introSummary = description %}
+
+{# Post list content #}
+{% set postListItems = article %}
+
+{% if postListItems.length < collections.article.length %}
+  {% set paginationNextUrl = pagination.nextPageHref %}
+  {% set paginationPrevUrl = pagination.previousPageHref %}
+{% endif %}
+
+{% block intro %}
+  <div class="l-stack l-stack--large">
+    {% include "partials/intro.njk" %}
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="l-page">
+    <div class="l-stack l-stack--large l-stack--large">
+      {% include "partials/post-list.njk" %}
+      {% include "partials/pagination.njk" %}
+    </div>
+  </div>
+{% endblock %}
